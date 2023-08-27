@@ -1,6 +1,56 @@
+import 'dart:convert';
+
+import 'package:aa2_desenvolvimento_movel/components/products_form.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
 import 'package:aa2_desenvolvimento_movel/components/products_list.dart';
 import 'package:aa2_desenvolvimento_movel/models/product.dart';
-import 'package:flutter/material.dart';
+
+class Album {
+  final int userId;
+  final int id;
+  final String title;
+
+  const Album({
+    required this.userId,
+    required this.id,
+    required this.title,
+  });
+
+  factory Album.fromJson(Map<String, dynamic> json) {
+    return Album(
+      userId: json['userId'],
+      id: json['id'],
+      title: json['title'],
+    );
+  }
+}
+
+Future<Album> fetchAlbum() async {
+  final response = await http
+      .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/10'));
+
+  if (response.statusCode == 200) {
+    return Album.fromJson(jsonDecode(response.body));
+  } else {
+    throw Exception('Failed to load products');
+  }
+}
+
+Future<List<Product>> fetchProducts() async {
+  final response =
+      await http.get(Uri.parse('http://192.168.18.219:5000/products'));
+
+  if (response.statusCode == 200) {
+    List<dynamic> jsonData = jsonDecode(response.body);
+    List<Product> products =
+        jsonData.map((data) => Product.fromJson(data)).toList();
+    return products;
+  } else {
+    throw Exception('Failed to load products');
+  }
+}
 
 void main() {
   runApp(const ProStockApp());
@@ -17,7 +67,7 @@ class ProStockApp extends StatelessWidget {
       home: const MyHomePage(),
       theme: theme.copyWith(
         colorScheme: theme.colorScheme.copyWith(
-          primary: Colors.purple[500],
+          primary: Colors.blue[500],
           secondary: Colors.teal[200],
         ),
         textTheme: theme.textTheme.copyWith(
@@ -56,24 +106,35 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  late Future<Album> futureAlbum;
+  late Future<List<Product>> futureProducts;
+
   final List<Product> _products = [
     Product(
-      id: '1',
-      title: 'Ração',
-      description: '1kg',
+      id: 1,
+      name: 'Ração',
+      code: '58546',
       amount: 10,
+      description: '1kg',
     ),
     Product(
-      id: '2',
-      title: 'Shampoo',
-      description: '50ml',
+      id: 2,
+      name: 'Shampoo',
+      code: '32445',
       amount: 7,
+      description: '50ml',
     ),
   ];
 
   @override
+  void initState() {
+    super.initState();
+    futureAlbum = fetchAlbum();
+    futureProducts = fetchProducts();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    print(_products);
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -86,11 +147,40 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: SingleChildScrollView(
         child: Column(children: [
-          ProductsList(_products),
+          //ProductsList(_products),
+          FutureBuilder(
+            future: futureProducts,
+            builder: (context, snapshot) {
+              // if (snapshot.hasData) {
+              //   return Text(snapshot.data!.title);
+              // } else if (snapshot.hasError) {
+              //   return Text('${snapshot.error}');
+              // }
+
+              // return const CircularProgressIndicator();
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return CircularProgressIndicator();
+              } else if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}');
+              } else if (snapshot.hasData) {
+                List<Product> products = snapshot.data!;
+                return ProductsList(products);
+              } else {
+                return Text('No data available.');
+              }
+            },
+          ),
         ]),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const ProductsForm(),
+            ),
+          );
+        },
         child: const Icon(Icons.add),
       ),
     );
