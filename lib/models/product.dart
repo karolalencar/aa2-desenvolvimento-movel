@@ -1,6 +1,6 @@
-import 'dart:convert';
+//import 'dart:convert';
 
-import 'package:aa2_desenvolvimento_movel/utils/uuid_utils.dart';
+//import 'package:aa2_desenvolvimento_movel/utils/uuid_utils.dart';
 
 class Product {
   final int id;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:intl/intl.dart';
+//import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:aa2_desenvolvimento_movel/components/products_form.dart';
@@ -10,7 +10,7 @@ import 'package:aa2_desenvolvimento_movel/models/product.dart';
 
 Future<List<Product>> fetchProducts() async {
   final response =
-      await http.get(Uri.parse('http://192.168.18.219:5000/products'));
+      await http.get(Uri.parse('http://192.168.0.104:5000/products'));
 
   if (response.statusCode == 200) {
     List<dynamic> jsonData = jsonDecode(response.body);
@@ -112,14 +112,15 @@ class _MyHomePageState extends State<MyHomePage> {
             future: futureProducts,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return CircularProgressIndicator();
+                return const CircularProgressIndicator();
               } else if (snapshot.hasError) {
+                print(snapshot.error);
                 return Text('Error: ${snapshot.error}');
               } else if (snapshot.hasData) {
                 _products = snapshot.data!;
                 return ProductsList(_products, _deleteProduct);
               } else {
-                return Text('No data available.');
+                return const Text('No data available.');
               }
             },
           ),

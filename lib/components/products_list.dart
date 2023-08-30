@@ -61,7 +61,7 @@ class ProductsList extends StatelessWidget {
                                 RichText(
                                   text: TextSpan(
                                     text: 'Quantidade: ',
-                                    style: TextStyle(color: Colors.black),
+                                    style: const TextStyle(color: Colors.black),
                                     children: [
                                       TextSpan(
                                         text: (product.amount).toString(),
@@ -95,7 +95,6 @@ class ProductsList extends StatelessWidget {
                                   Uuid uuid = const Uuid();
                                   String productId =
                                       uuid.v5(Uuid.NAMESPACE_OID, stringId);
-                                  print(productId);
 
                                   http
                                       .delete(Uri.parse(
@@ -104,7 +103,7 @@ class ProductsList extends StatelessWidget {
                                     if (response.statusCode == 200) {
                                       products.remove(product);
                                     } else {
-                                      Text('não deletou');
+                                      const Text('não deletou');
                                     }
                                   }).catchError((error) {});
                                 }

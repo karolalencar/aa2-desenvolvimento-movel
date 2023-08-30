@@ -5,6 +5,6 @@ String convertBytesToUuid(List<dynamic> bytes) {
     return (previousValue << 8) | element;
   });
 
-  Uuid uuid = Uuid();
+  Uuid uuid = const Uuid();
   return uuid.v5(Uuid.NAMESPACE_OID, id.toString());
 }
