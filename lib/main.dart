@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:aa2_desenvolvimento_movel/components/products_form.dart';
 import 'package:aa2_desenvolvimento_movel/components/products_list.dart';
@@ -32,6 +34,8 @@ class ProStockApp extends StatelessWidget {
     final ThemeData theme = ThemeData();
 
     return MaterialApp(
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       home: const MyHomePage(),
       theme: theme.copyWith(
         colorScheme: theme.colorScheme.copyWith(

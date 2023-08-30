@@ -17,9 +17,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
   uuid: ^3.0.4
 
+  intl: ^0.18.1
 
   cupertino_icons: ^1.0.2
   http: ^1.1.0
@@ -38,6 +41,8 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
+
+  generate: true
 
   assets:
     - assets/images/generic_image.png
