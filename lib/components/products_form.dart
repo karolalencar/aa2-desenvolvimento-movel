@@ -10,7 +10,7 @@ TextEditingController descriptionController = TextEditingController();
 TextEditingController amountController = TextEditingController();
 
 Future<void> createProduct() async {
-  final url = Uri.parse('http://192.168.18.219:5000/products');
+  final url = Uri.parse('http://192.168.0.104:5000/products');
 
   final Map<String, dynamic> requestData = {
     'name': nameController.text,

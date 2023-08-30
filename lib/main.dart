@@ -10,7 +10,7 @@ import 'package:aa2_desenvolvimento_movel/models/product.dart';
 
 Future<List<Product>> fetchProducts() async {
   final response =
-      await http.get(Uri.parse('http://192.168.18.219:5000/products'));
+      await http.get(Uri.parse('http://192.168.0.104:5000/products'));
 
   if (response.statusCode == 200) {
     List<dynamic> jsonData = jsonDecode(response.body);
@@ -81,11 +81,20 @@ class _MyHomePageState extends State<MyHomePage> {
   late Future<List<Product>> futureProducts;
 
   List<Product> _products = [];
+  Map<int, String> idToUUidMap = {};
 
-  void _deleteProduct(int index) {
-    setState(() {
-      _products.removeAt(index);
-    });
+  void _deleteProduct(String productId) async {
+    final response = await http.delete(
+      Uri.parse('http://192.168.0.104:5000/products/$productId'),
+    );
+
+    if (response.statusCode == 200) {
+      setState(() {
+        _products.removeWhere((product) => product.id == productId);
+      });
+    } else {
+      print("Error deleting product");
+    }
   }
 
   @override

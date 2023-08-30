@@ -6,7 +6,7 @@ import 'package:aa2_desenvolvimento_movel/models/product.dart';
 
 class ProductsList extends StatelessWidget {
   final List<Product> products;
-  final Function(int) onDelete;
+  final Function(String) onDelete;
 
   const ProductsList(this.products, this.onDelete, {super.key});
 
@@ -83,30 +83,25 @@ class ProductsList extends StatelessWidget {
                         Row(
                           children: [
                             IconButton(
-                              onPressed: () {},
-                              icon: const Icon(Icons.edit),
-                              color: Theme.of(context).colorScheme.secondary,
-                            ),
-                            IconButton(
                               onPressed: () {
-                                final index = products.indexOf(product);
-                                if (index != -1) {
-                                  String stringId = (product.id).toString();
-                                  Uuid uuid = const Uuid();
-                                  String productId =
-                                      uuid.v5(Uuid.NAMESPACE_OID, stringId);
+                                onDelete(product.id);
+                                // if (index != -1) {
+                                //   String stringId = (product.id).toString();
+                                //   Uuid uuid = const Uuid();
+                                //   String productId =
+                                //       uuid.v5(Uuid.NAMESPACE_OID, stringId);
 
-                                  http
-                                      .delete(Uri.parse(
-                                          'http://192.168.18.219:5000/products/$productId'))
-                                      .then((response) {
-                                    if (response.statusCode == 200) {
-                                      products.remove(product);
-                                    } else {
-                                      const Text('não deletou');
-                                    }
-                                  }).catchError((error) {});
-                                }
+                                //   http
+                                //       .delete(Uri.parse(
+                                //           'http://192.168.18.219:5000/products/$productId'))
+                                //       .then((response) {
+                                //     if (response.statusCode == 200) {
+                                //       products.remove(product);
+                                //     } else {
+                                //       const Text('não deletou');
+                                //     }
+                                //   }).catchError((error) {});
+                                // }
                               },
                               icon: const Icon(Icons.delete),
                               color: Theme.of(context).colorScheme.error,
