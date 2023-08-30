@@ -1,0 +1,9 @@
+{
+    "language": "português",
+    "helloWorld": "Olá mundo",
+    "name": "Nome do Produto",
+    "code_F": "Codigo",
+    "quant_F": "Quantidade",
+    "desc_F": "Descriçao",
+    "add_F": "Cadastrar"
+}

@@ -1,0 +1,9 @@
+{
+    "language": "ingles",
+    "helloWorld": "Hello",
+    "name": "Product Name",
+    "code_F": "Code",
+    "quant_F": "Quantity",
+    "desc_F": "Description",
+    "add_F": "Register"
+}

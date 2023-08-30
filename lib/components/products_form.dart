@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProductsForm extends StatefulWidget {
   const ProductsForm({super.key});
@@ -39,7 +41,7 @@ class _ProductsFormState extends State<ProductsForm> {
               padding: EdgeInsets.symmetric(horizontal: 30),
               child: TextFormField(
                 decoration: InputDecoration(
-                  hintText: 'Nome do Produto',
+                  hintText: AppLocalizations.of(context)!.name,
                   fillColor: Colors.white,
                   filled: true,
                 ),
@@ -51,7 +53,7 @@ class _ProductsFormState extends State<ProductsForm> {
               child: TextFormField(
                 obscureText: true,
                 decoration: InputDecoration(
-                  hintText: 'Codigo',
+                  hintText: AppLocalizations.of(context)!.code_F,
                   fillColor: Colors.white,
                   filled: true,
                 ),
@@ -63,7 +65,7 @@ class _ProductsFormState extends State<ProductsForm> {
               child: TextFormField(
                 obscureText: true,
                 decoration: InputDecoration(
-                  hintText: 'Quantidade ',
+                  hintText: AppLocalizations.of(context)!.quant_F,
                   fillColor: Colors.white,
                   filled: true,
                 ),
@@ -75,7 +77,7 @@ class _ProductsFormState extends State<ProductsForm> {
               child: TextFormField(
                 obscureText: true,
                 decoration: InputDecoration(
-                  hintText: 'Descrição',
+                  hintText: AppLocalizations.of(context)!.desc_F,
                   fillColor: Colors.white,
                   filled: true,
                 ),
@@ -89,7 +91,7 @@ class _ProductsFormState extends State<ProductsForm> {
               style: ElevatedButton.styleFrom(
                 primary: Color.fromARGB(255, 19, 131, 23), // Background botao
               ),              
-              child: Text('Cadastrar'),
+              child: Text(AppLocalizations.of(context)!.add_F),
             ),
           ],
         ),
