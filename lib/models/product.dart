@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:aa2_desenvolvimento_movel/utils/uuid_utils.dart';
+
 class Product {
   final int id;
   final String name;
@@ -29,4 +31,8 @@ class Product {
       description: json['description'],
     );
   }
+
+  //String getUuidString() {
+  //return convertBytesToUuid(this.)
+  //}
 }

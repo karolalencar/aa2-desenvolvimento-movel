@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:uuid/uuid.dart';
 
 import 'package:aa2_desenvolvimento_movel/models/product.dart';
 
 class ProductsList extends StatelessWidget {
   final List<Product> products;
+  final Function(int) onDelete;
 
-  const ProductsList(this.products, {super.key});
+  const ProductsList(this.products, this.onDelete, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.only(top: 40),
       height: 500,
       child: products.isEmpty
           ? Column(
@@ -86,16 +89,25 @@ class ProductsList extends StatelessWidget {
                             ),
                             IconButton(
                               onPressed: () {
-                                http
-                                    .delete(Uri.parse(
-                                        'http://192.168.18.219:5000/products/${product.id}'))
-                                    .then((response) {
-                                  if (response.statusCode == 200) {
-                                    Text('deletou');
-                                  } else {
-                                    Text('não deletou');
-                                  }
-                                }).catchError((error) {});
+                                final index = products.indexOf(product);
+                                if (index != -1) {
+                                  String stringId = (product.id).toString();
+                                  Uuid uuid = const Uuid();
+                                  String productId =
+                                      uuid.v5(Uuid.NAMESPACE_OID, stringId);
+                                  print(productId);
+
+                                  http
+                                      .delete(Uri.parse(
+                                          'http://192.168.18.219:5000/products/$productId'))
+                                      .then((response) {
+                                    if (response.statusCode == 200) {
+                                      products.remove(product);
+                                    } else {
+                                      Text('não deletou');
+                                    }
+                                  }).catchError((error) {});
+                                }
                               },
                               icon: const Icon(Icons.delete),
                               color: Theme.of(context).colorScheme.error,
