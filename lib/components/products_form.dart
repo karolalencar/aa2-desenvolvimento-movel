@@ -60,20 +60,26 @@ class _ProductsFormState extends State<ProductsForm> {
             end: Alignment.bottomRight,
           ),
         ),
-        child: Center(
+      child: ListView(
+        children: [
+          Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Icon(
                 Icons.add_shopping_cart_outlined, // Ícone centralizado
-                size: 100,
+                size: 110,
                 color: Color.fromARGB(255, 19, 131, 23),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 30),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: TextFormField(
                   controller: nameController,
+                  style: TextStyle(
+                      fontSize: 16, 
+                      fontFamily: 'Montserrat',
+                  ),
                   decoration: InputDecoration(
                     hintText: AppLocalizations.of(context)!.name,
                     fillColor: Colors.white,
@@ -86,6 +92,10 @@ class _ProductsFormState extends State<ProductsForm> {
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: TextFormField(
                   controller: codeController,
+                  style: TextStyle(
+                      fontSize: 16, 
+                      fontFamily: 'Montserrat',
+                  ),
                   decoration: InputDecoration(
                     hintText: AppLocalizations.of(context)!.code_F,
                     fillColor: Colors.white,
@@ -98,6 +108,10 @@ class _ProductsFormState extends State<ProductsForm> {
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: TextFormField(
                   controller: amountController,
+                  style: TextStyle(
+                      fontSize: 16, 
+                      fontFamily: 'Montserrat',
+                  ),
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     hintText: AppLocalizations.of(context)!.quant_F,
@@ -111,6 +125,10 @@ class _ProductsFormState extends State<ProductsForm> {
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: TextFormField(
                   controller: descriptionController,
+                  style: TextStyle(
+                      fontSize: 16, 
+                      fontFamily: 'Montserrat',
+                  ),
                   decoration: InputDecoration(
                     hintText: AppLocalizations.of(context)!.desc_F,
                     fillColor: Colors.white,
@@ -132,7 +150,7 @@ class _ProductsFormState extends State<ProductsForm> {
                     content: Text(
                       'Product added successfully!',
                     ),
-                    backgroundColor: Colors.blue,
+                    backgroundColor: Color.fromARGB(255, 19, 131, 23),
                     duration: Duration(seconds: 2),
                   ));
                   Future.delayed(Duration(seconds: 2), () {
@@ -140,14 +158,16 @@ class _ProductsFormState extends State<ProductsForm> {
                   });
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  backgroundColor: Theme.of(context).colorScheme.secondary,
                 ),
                 child: Text(AppLocalizations.of(context)!.add_F),
-              ),
-            ],
+                ),
+              ],
+            ),
           ),
-        ),
+        ],
       ),
+    ),
     );
   }
 }

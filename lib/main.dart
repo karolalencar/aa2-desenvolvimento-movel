@@ -39,8 +39,8 @@ class ProStockApp extends StatelessWidget {
       home: const MyHomePage(),
       theme: theme.copyWith(
         colorScheme: theme.colorScheme.copyWith(
-          primary: Colors.blue[500],
-          secondary: Colors.teal[200],
+          primary: Color.fromARGB(255, 190, 250, 189),
+          secondary:Color.fromARGB(255, 19, 131, 23),
         ),
         textTheme: theme.textTheme.copyWith(
           titleLarge: const TextStyle(
@@ -114,6 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
         title: const Text('Produtos'),
+        backgroundColor: Color.fromARGB(255, 19, 131, 23),
       ),
       body: SingleChildScrollView(
         child: Column(children: [
