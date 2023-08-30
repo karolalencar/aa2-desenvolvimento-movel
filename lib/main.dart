@@ -10,7 +10,7 @@ import 'package:aa2_desenvolvimento_movel/models/product.dart';
 
 Future<List<Product>> fetchProducts() async {
   final response =
-      await http.get(Uri.parse('http://192.168.0.104:5000/products'));
+      await http.get(Uri.parse('http://192.168.18.219:5000/products'));
 
   if (response.statusCode == 200) {
     List<dynamic> jsonData = jsonDecode(response.body);

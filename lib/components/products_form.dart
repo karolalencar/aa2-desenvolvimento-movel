@@ -10,13 +10,13 @@ TextEditingController descriptionController = TextEditingController();
 TextEditingController amountController = TextEditingController();
 
 Future<void> createProduct() async {
-  final url = Uri.parse('http://192.168.0.104:5000/products');
+  final url = Uri.parse('http://192.168.18.219:5000/products');
 
   final Map<String, dynamic> requestData = {
     'name': nameController.text,
     'code': codeController.text,
-    'amount': amountController,
-    'description': descriptionController,
+    'amount': amountController.text,
+    'description': descriptionController.text,
   };
 
   final response = await http.put(
@@ -42,10 +42,13 @@ class ProductsForm extends StatefulWidget {
 }
 
 class _ProductsFormState extends State<ProductsForm> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       //backgroundColor: Colors.green, // Plano de fundo verde
+      key: _scaffoldKey,
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -70,6 +73,7 @@ class _ProductsFormState extends State<ProductsForm> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: TextFormField(
+                  controller: nameController,
                   decoration: InputDecoration(
                     hintText: AppLocalizations.of(context)!.name,
                     fillColor: Colors.white,
@@ -81,7 +85,7 @@ class _ProductsFormState extends State<ProductsForm> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: TextFormField(
-                  obscureText: true,
+                  controller: codeController,
                   decoration: InputDecoration(
                     hintText: AppLocalizations.of(context)!.code_F,
                     fillColor: Colors.white,
@@ -93,7 +97,8 @@ class _ProductsFormState extends State<ProductsForm> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: TextFormField(
-                  obscureText: true,
+                  controller: amountController,
+                  keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     hintText: AppLocalizations.of(context)!.quant_F,
                     fillColor: Colors.white,
@@ -105,7 +110,7 @@ class _ProductsFormState extends State<ProductsForm> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: TextFormField(
-                  obscureText: true,
+                  controller: descriptionController,
                   decoration: InputDecoration(
                     hintText: AppLocalizations.of(context)!.desc_F,
                     fillColor: Colors.white,
@@ -116,8 +121,23 @@ class _ProductsFormState extends State<ProductsForm> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  // Lógica para o botão de submit
                   createProduct();
+
+                  nameController.clear();
+                  codeController.clear();
+                  amountController.clear();
+                  descriptionController.clear();
+
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text(
+                      'Product added successfully!',
+                    ),
+                    backgroundColor: Colors.blue,
+                    duration: Duration(seconds: 2),
+                  ));
+                  Future.delayed(Duration(seconds: 2), () {
+                    Navigator.pop(context);
+                  });
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Theme.of(context).colorScheme.primary,
