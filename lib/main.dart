@@ -10,7 +10,7 @@ import 'package:aa2_desenvolvimento_movel/models/product.dart';
 
 Future<List<Product>> fetchProducts() async {
   final response =
-      await http.get(Uri.parse('http://192.168.0.104:5000/products'));
+      await http.get(Uri.parse('http://192.168.18.219:5000/products'));
 
   if (response.statusCode == 200) {
     List<dynamic> jsonData = jsonDecode(response.body);
@@ -39,8 +39,8 @@ class ProStockApp extends StatelessWidget {
       home: const MyHomePage(),
       theme: theme.copyWith(
         colorScheme: theme.colorScheme.copyWith(
-          primary: Color.fromARGB(255, 190, 250, 189),
-          secondary:Color.fromARGB(255, 19, 131, 23),
+          primary: const Color.fromARGB(255, 190, 250, 189),
+          secondary: const Color.fromARGB(255, 19, 131, 23),
         ),
         textTheme: theme.textTheme.copyWith(
           titleLarge: const TextStyle(
@@ -85,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _deleteProduct(String productId) async {
     final response = await http.delete(
-      Uri.parse('http://192.168.0.104:5000/products/$productId'),
+      Uri.parse('http://192.168.18.219:5000/products/$productId'),
     );
 
     if (response.statusCode == 200) {
@@ -114,7 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
         title: const Text('Produtos'),
-        backgroundColor: Color.fromARGB(255, 19, 131, 23),
+        backgroundColor: const Color.fromARGB(255, 19, 131, 23),
       ),
       body: SingleChildScrollView(
         child: Column(children: [

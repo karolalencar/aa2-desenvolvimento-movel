@@ -10,7 +10,7 @@ TextEditingController descriptionController = TextEditingController();
 TextEditingController amountController = TextEditingController();
 
 Future<void> createProduct() async {
-  final url = Uri.parse('http://192.168.0.104:5000/products');
+  final url = Uri.parse('http://192.168.18.219:5000/products');
 
   final Map<String, dynamic> requestData = {
     'name': nameController.text,
@@ -47,7 +47,6 @@ class _ProductsFormState extends State<ProductsForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: Colors.green, // Plano de fundo verde
       key: _scaffoldKey,
       body: Container(
         decoration: const BoxDecoration(
@@ -60,114 +59,114 @@ class _ProductsFormState extends State<ProductsForm> {
             end: Alignment.bottomRight,
           ),
         ),
-      child: ListView(
-        children: [
-          Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(
-                Icons.add_shopping_cart_outlined, // Ícone centralizado
-                size: 110,
-                color: Color.fromARGB(255, 19, 131, 23),
-              ),
-              const SizedBox(height: 30),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: TextFormField(
-                  controller: nameController,
-                  style: TextStyle(
-                      fontSize: 16, 
-                      fontFamily: 'Montserrat',
+        child: ListView(
+          children: [
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.add_shopping_cart_outlined, // Ícone centralizado
+                    size: 110,
+                    color: Color.fromARGB(255, 19, 131, 23),
                   ),
-                  decoration: InputDecoration(
-                    hintText: AppLocalizations.of(context)!.name,
-                    fillColor: Colors.white,
-                    filled: true,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: TextFormField(
-                  controller: codeController,
-                  style: TextStyle(
-                      fontSize: 16, 
-                      fontFamily: 'Montserrat',
-                  ),
-                  decoration: InputDecoration(
-                    hintText: AppLocalizations.of(context)!.code_F,
-                    fillColor: Colors.white,
-                    filled: true,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: TextFormField(
-                  controller: amountController,
-                  style: TextStyle(
-                      fontSize: 16, 
-                      fontFamily: 'Montserrat',
-                  ),
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    hintText: AppLocalizations.of(context)!.quant_F,
-                    fillColor: Colors.white,
-                    filled: true,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: TextFormField(
-                  controller: descriptionController,
-                  style: TextStyle(
-                      fontSize: 16, 
-                      fontFamily: 'Montserrat',
-                  ),
-                  decoration: InputDecoration(
-                    hintText: AppLocalizations.of(context)!.desc_F,
-                    fillColor: Colors.white,
-                    filled: true,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  createProduct();
-
-                  nameController.clear();
-                  codeController.clear();
-                  amountController.clear();
-                  descriptionController.clear();
-
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text(
-                      'Product added successfully!',
+                  const SizedBox(height: 30),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    child: TextFormField(
+                      controller: nameController,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontFamily: 'Montserrat',
+                      ),
+                      decoration: InputDecoration(
+                        hintText: AppLocalizations.of(context)!.name,
+                        fillColor: Colors.white,
+                        filled: true,
+                      ),
                     ),
-                    backgroundColor: Color.fromARGB(255, 19, 131, 23),
-                    duration: Duration(seconds: 2),
-                  ));
-                  Future.delayed(Duration(seconds: 2), () {
-                    Navigator.pop(context);
-                  });
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Theme.of(context).colorScheme.secondary,
-                ),
-                child: Text(AppLocalizations.of(context)!.add_F),
-                ),
-              ],
+                  ),
+                  const SizedBox(height: 10),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    child: TextFormField(
+                      controller: codeController,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontFamily: 'Montserrat',
+                      ),
+                      decoration: InputDecoration(
+                        hintText: AppLocalizations.of(context)!.code_F,
+                        fillColor: Colors.white,
+                        filled: true,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    child: TextFormField(
+                      controller: amountController,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontFamily: 'Montserrat',
+                      ),
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        hintText: AppLocalizations.of(context)!.quant_F,
+                        fillColor: Colors.white,
+                        filled: true,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    child: TextFormField(
+                      controller: descriptionController,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontFamily: 'Montserrat',
+                      ),
+                      decoration: InputDecoration(
+                        hintText: AppLocalizations.of(context)!.desc_F,
+                        fillColor: Colors.white,
+                        filled: true,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      createProduct();
+
+                      nameController.clear();
+                      codeController.clear();
+                      amountController.clear();
+                      descriptionController.clear();
+
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text(
+                          'Product added successfully!',
+                        ),
+                        backgroundColor: Color.fromARGB(255, 19, 131, 23),
+                        duration: Duration(seconds: 2),
+                      ));
+                      Future.delayed(const Duration(seconds: 2), () {
+                        Navigator.pop(context);
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).colorScheme.secondary,
+                    ),
+                    child: Text(AppLocalizations.of(context)!.add_F),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-    ),
     );
   }
 }

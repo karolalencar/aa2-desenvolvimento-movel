@@ -1,7 +1,3 @@
-//import 'dart:convert';
-
-//import 'package:aa2_desenvolvimento_movel/utils/uuid_utils.dart';
-import 'package:uuid/uuid.dart';
 import 'dart:typed_data';
 
 class Product {
@@ -22,10 +18,8 @@ class Product {
   factory Product.fromJson(Map<String, dynamic> json) {
     final bufferData = json['id']['data'];
 
-    // Convert buffer bytes to Uint8List
     final bufferBytes = Uint8List.fromList(List<int>.from(bufferData));
 
-    // Manually convert bytes to UUID format
     final uuid = _convertBytesToUuid(bufferBytes);
 
     return Product(
@@ -44,7 +38,4 @@ class Product {
 
     return '$uuidString';
   }
-  //String getUuidString() {
-  //return convertBytesToUuid(this.)
-  //}
 }
